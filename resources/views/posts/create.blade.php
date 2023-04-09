@@ -9,6 +9,8 @@
         <div>
             <div id="editor" class=""></div>
             <textarea name="body" style="display:none" id="hiddenArea"></textarea>
+            <div id="topics" class="mt-2"></div>
+            <input type="text" name="topic" id="topic" placeholder="Comma separated list of topics..." class="focus:outline-none w-full mt-2 text-sm">
         </div>
     </div>
     @push('scripts')
@@ -41,6 +43,45 @@
             quill.on('text-change', function(range, oldRange, source) {
                 document.getElementById('hiddenArea').value = quill.root.innerHTML;
             });
+
+            var topic = document.getElementById('topic');
+            var topics = document.getElementById('topics');
+            var counter = 0;
+
+            topic.addEventListener('paste', function(e) {
+                e.preventDefault();
+            });
+
+            topic.addEventListener('keyup', function(e) {
+                if (e.keyCode == 188 && topic.value.trim() != ',' && counter < 5) {
+                    var value = topic.value.replace(',', '').trim();
+                    topic.value = '';
+                    var p = document.createElement('p');
+                    p.classList.add('inline-block', 'bg-gray-200', 'rounded-full', 'px-3', 'py-1', 'text-sm', 'text-gray-700', 'mr-2');
+                    p.innerHTML = value + '<span class="ml-2 cursor-pointer">x</span>';
+                    topics.appendChild(p);
+                    var input = document.createElement('input');
+                    input.value = value;
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', `topic-${counter+1}`);
+                    topics.appendChild(input);
+                    counter++;
+                    if (counter == 5) {
+                        topic.setAttribute('disabled', 'disabled');
+                    }
+                }
+            });
+
+            topics.addEventListener('click', function(e) {
+                if (e.target.tagName == 'SPAN') {
+                    counter--;
+                    if (counter < 5) {
+                        topic.removeAttribute('disabled');
+                    }
+                    e.target.parentNode.remove();
+                }
+            });
+
         </script>
     @endpush
 </x-layouts.author>
