@@ -5,12 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Bloggink</title>
-        
+        @stack('styles')
         @vite('resources/css/app.css')
     </head>
     <body class="antialiased">
-        <x-layouts.user.nav />
+        <x-layouts.partials.nav role="user" />
         {{$slot}}
-        <x-layouts.user.footer />
+        @stack('scripts')
     </body>
 </html>

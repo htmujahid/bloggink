@@ -9,9 +9,7 @@
         @vite('resources/css/app.css')
     </head>
     <body class="antialiased">
-        <x-layouts.partials.nav role="guest"/>
         {{$slot}}
-        <x-layouts.partials.footer />
         @stack('scripts')
     </body>
 </html>

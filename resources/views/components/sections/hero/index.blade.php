@@ -1,5 +1,5 @@
-<section class="py-14">
-    <div class="max-w-screen-xl mx-auto px-4 text-center md:px-8">
+<section class="my-32">
+    <div class="container mx-auto px-4 text-center md:px-8">
         <div class="max-w-xl md:mx-auto">
             <h3 class="text-gray-800 text-3xl font-semibold sm:text-4xl">
                 Unlock the power of blogging    
